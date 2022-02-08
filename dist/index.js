@@ -142,3 +142,17 @@ class Employee extends Person {
 const emp = new Employee(333, 'Hank', 'hanksmail@gmail.com', 'cleaner');
 console.log(emp.register());
 // Generics
+let fn = (items) => {
+    return new Array().concat(items);
+};
+let numArray = fn([1, 2, 3, 4]);
+let strArray = fn(['Bibs', 'Bjorn', 'Dalton']);
+numArray.push('Boby');
+// T represent a placeholder for a type
+let fn_with_T = (items) => {
+    return new Array().concat(items);
+};
+let numArray_with_T = fn_with_T([1, 2, 3, 4]);
+let strArray_with_T = fn_with_T(['Bibs', 'Bjorn', 'Dalton']);
+// numArray_with_T.push('Boby') // it's an error cause we declare type with T
+numArray_with_T.push(3333);

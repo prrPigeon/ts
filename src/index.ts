@@ -229,3 +229,22 @@ console.log(emp.register())
 
 
 // Generics
+let fn = (items: any[]): any[] => {
+    return new Array().concat(items)
+}
+
+let numArray = fn([1,2,3,4])
+let strArray = fn(['Bibs', 'Bjorn', 'Dalton'])
+
+numArray.push('Boby')
+
+// T represent a placeholder for a type
+let fn_with_T = <T>(items: T[]): T[] => {
+    return new Array().concat(items)
+}
+
+let numArray_with_T = fn_with_T<number>([1,2,3,4])
+let strArray_with_T = fn_with_T<string>(['Bibs', 'Bjorn', 'Dalton'])
+
+// numArray_with_T.push('Boby') // it's an error cause we declare type with T
+numArray_with_T.push(3333)
