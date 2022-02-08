@@ -115,7 +115,7 @@ const sanja = new Person(23, 'Sanja', 'sanja@mail.com');
 mijato._id = 333;
 sanja._id = 344;
 // because is private you cannot assing new mail, it will produce an error
-// protected (probably) can be used only within a class
+// if it is protected, it can be used witin a class or a witin extended class
 // more on private and protected on: https://dev.to/bhagatparwinder/classes-in-js-public-private-and-protected-1lok
 // and also you cannot console.log private ones
 // mijato.email = 'mijatovski@gmail.com'
@@ -131,3 +131,14 @@ class PersonFromInterface {
         // return 22 // will produce error, because you already declared that register func will return string
     }
 }
+// inheritance with interfaces (SUBCLASS)
+// maybe to add position as well
+class Employee extends Person {
+    constructor(_id, name, email, position) {
+        super(_id, name, email);
+        this.position = position;
+    }
+}
+const emp = new Employee(333, 'Hank', 'hanksmail@gmail.com', 'cleaner');
+console.log(emp.register());
+// Generics
