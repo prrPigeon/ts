@@ -64,3 +64,152 @@ enum Direction3 {
     Right = 'Right'
 }
 console.log(Direction3.Up)
+
+
+// Objects
+const user:{
+    _id: number,
+    user: string
+} = {
+    _id: 1,
+    user: 'Mijato'
+}
+
+// but previous few lines looks messy, you can do it like this:
+type User = {
+    _id: number
+    user: string
+}
+const anotherUser: User = {
+    _id: 33,
+    user: 'John Doe'
+}
+
+// Type Assertion (you can declare it in two ways)
+let cid: any = 1
+
+//let customerId= <number>cid // first way
+let customerId = cid as number
+
+// Functions with types
+// by default it will complain that you did not give a types of arguments, but you can exclude it in tsconfig.js
+
+// and last :number is which type we expect as return value
+function addNum(x: number, y:number): number {
+    return x + y
+}
+console.log(addNum(33, 33))
+
+// Void
+function log(message: string | number): void {
+    console.log(message)
+}
+log(33)
+
+// Interfaces
+interface UserInterface {
+    _id: number
+    name: string
+}
+
+const user1: UserInterface = {
+    _id: 1,
+    name: 'John'
+}
+
+// types vs interfaces
+type Point = number | string
+const p1: Point = 1
+// but you cannot user interfaces like this
+// you cannot user interfaces with primitives and union
+// but you will use them in case with objects
+
+
+// in interfaces there is an optional field, and it is declared as key name with ?, otherwise it will give you an error
+interface PersonInterface {
+    _id: number
+    name: string
+    age?: number 
+}
+const user111: PersonInterface = {
+    _id:33,
+    name: 'Mijatonius'
+}
+
+// you can declare readonly field in Interface
+interface Person0Interface {
+    _id: number
+    readonly name: string
+    age?: number 
+}
+
+const new_user: Person0Interface = {
+    _id: 333,
+    name: 'Clark'
+}
+new_user._id = 334
+// new_user.name = 'Artur' // produce an error, becaues it is readonly field
+
+// You can also user interfaces with functions
+interface MathFunc{
+    (x: number, y: number): number
+}
+
+const addTwoNums: MathFunc = (x: number, y: number): number => x + y // every arg must follow interface type declaration
+// here we user interface as a template
+const subtractTwoNums: MathFunc = (x: number, y: number): number => x - y
+
+// Classes, how to use them with interfaces (they started from es6)
+class Person {
+    _id: number // these are public by default, but we can make them protected or to be a private
+    name: string
+    private email: string
+
+    constructor(_id: number, name: string, email: string) {
+        this._id = _id
+        this.name = name
+        this.email = email
+    }
+
+    register() {
+        return  `${this.name} is registerd now!!!`
+    }
+}
+
+const mijato = new Person(33, 'Vladimir', 'mijato@mail.com')
+const sanja = new Person(23, 'Sanja', 'sanja@mail.com')
+
+mijato._id = 333
+sanja._id = 344
+
+// because is private you cannot assing new mail, it will produce an error
+// protected (probably) can be used only within a class
+// more on private and protected on: https://dev.to/bhagatparwinder/classes-in-js-public-private-and-protected-1lok
+// and also you cannot console.log private ones
+// mijato.email = 'mijatovski@gmail.com'
+
+console.log(mijato.register())
+console.log(mijato, sanja)
+
+// Interfaces with classes
+interface ClassPersonInterface {
+    _id: number
+    name: string
+    register(): string
+}
+
+class PersonFromInterface implements ClassPersonInterface {
+    _id: number
+    name: string
+
+    constructor(_id: number, name: string, email: string) {
+        this._id = _id
+        this.name = name
+
+    }
+
+    register() {
+        return  `${this.name} is registerd now!!!`
+        // return 22 // will produce error, because you already declared that register func will return string
+    }
+}

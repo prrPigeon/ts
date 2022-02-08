@@ -57,3 +57,77 @@ var Direction3;
     Direction3["Right"] = "Right";
 })(Direction3 || (Direction3 = {}));
 console.log(Direction3.Up);
+// Objects
+const user = {
+    _id: 1,
+    user: 'Mijato'
+};
+const anotherUser = {
+    _id: 33,
+    user: 'John Doe'
+};
+// Type Assertion (you can declare it in two ways)
+let cid = 1;
+//let customerId= <number>cid // first way
+let customerId = cid;
+// Functions with types
+// by default it will complain that you did not give a types of arguments, but you can exclude it in tsconfig.js
+// and last :number is which type we expect as return value
+function addNum(x, y) {
+    return x + y;
+}
+console.log(addNum(33, 33));
+// Void
+function log(message) {
+    console.log(message);
+}
+log(33);
+const user1 = {
+    _id: 1,
+    name: 'John'
+};
+const p1 = 1;
+const user111 = {
+    _id: 33,
+    name: 'Mijatonius'
+};
+const new_user = {
+    _id: 333,
+    name: 'Clark'
+};
+new_user._id = 334;
+const addTwoNums = (x, y) => x + y; // every arg must follow interface type declaration
+// here we user interface as a template
+const subtractTwoNums = (x, y) => x - y;
+// Classes, how to use them with interfaces (they started from es6)
+class Person {
+    constructor(_id, name, email) {
+        this._id = _id;
+        this.name = name;
+        this.email = email;
+    }
+    register() {
+        return `${this.name} is registerd now!!!`;
+    }
+}
+const mijato = new Person(33, 'Vladimir', 'mijato@mail.com');
+const sanja = new Person(23, 'Sanja', 'sanja@mail.com');
+mijato._id = 333;
+sanja._id = 344;
+// because is private you cannot assing new mail, it will produce an error
+// protected (probably) can be used only within a class
+// more on private and protected on: https://dev.to/bhagatparwinder/classes-in-js-public-private-and-protected-1lok
+// and also you cannot console.log private ones
+// mijato.email = 'mijatovski@gmail.com'
+console.log(mijato.register());
+console.log(mijato, sanja);
+class PersonFromInterface {
+    constructor(_id, name, email) {
+        this._id = _id;
+        this.name = name;
+    }
+    register() {
+        return `${this.name} is registerd now!!!`;
+        // return 22 // will produce error, because you already declared that register func will return string
+    }
+}
