@@ -1,0 +1,5 @@
+$ npx create-react-app react-typescript-demo --template typescript   ---> create react app to use typescript
+- cd to project dir, and command to run a app is:
+$ yarn start or npm start
+
+USE TYPES WHEN BILDING APPS, AND USE INTERFACES WHEN BUILDING LIBRARIES
